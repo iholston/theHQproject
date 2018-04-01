@@ -173,7 +173,7 @@ func picToQuestion(index int) ([]byte, [3][]byte, bool) {
 
 
 	// Step 3: Cleanup. Move ScreenShots and text stuffs to log folder & return
-	if testMode == true {
+	if testMode == true || noFile == true {
 		cmd3 := "rm ~/Desktop/QandA.png ~/Desktop/croppedPic.png ~/Desktop/text.txt"
 		movePNG := exec.Command("bash", "-c", cmd3)
 		movePNG.Run()

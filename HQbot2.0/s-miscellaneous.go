@@ -114,22 +114,3 @@ func returnScreenShotsToNormal(){
 	addDateandTimeBack.Run()
 	restart.Run()
 }
-
-//func makeURL(question []byte) string {
-/*newQuestion := make([]byte, len(question) + 100)
-questionUp := 0
-for i := 0; i < len(question); i++ {
-	if question[i] == 32 {
-		newQuestion[questionUp] = '%'
-		newQuestion[questionUp + 1] = '2'
-		newQuestion[questionUp + 2] = '0'
-		questionUp = questionUp + 3
-		continue
-	}
-	newQuestion[questionUp] = question[i]
-	questionUp++
-}
-finalQuestion := string(newQuestion)
-finalQuestion = strings.Trim(finalQuestion, "\x00")
-return finalQuestion
-}*/

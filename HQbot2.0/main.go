@@ -5,6 +5,7 @@ import (
 	"time"
 	"fmt"
 	"os"
+	"bufio"
 )
 
 var botStartTime = time.Now().Format("MonJan22006@15:04:05")
@@ -12,6 +13,7 @@ var folderName = "/Users/TheChosenOne/go/src/github.com/iholston/theHQProject/ga
 var testMode = false
 var useDefault = false
 var testGame = false
+var noFile = false
 var terminalLog = "terminalLog"
 var testFN = "/Users/TheChosenOne/Desktop/testgamenotes.txt"
 
@@ -29,19 +31,27 @@ func init() { // 1. Changes Default ScreenShot Names and 2. Creates the session 
 	restart.Run()
 
 	// Create New folder for Question.pngs and QuestionText.pngs and create log file
-	cmd4 := "mkdir " + folderName
-	createNewFolder := exec.Command("bash", "-c", cmd4)
-	createNewFolder.Run()
-	fileName := folderName + "logs"
-	fileName2 := folderName + "terminalCapture.txt" // Text file of all terminal output
-	_ , err := os.Create(fileName)
-	if err != nil {
-		panic(err)
+	fmt.Print("\nWould you like to make logs for this game? (Y/n): ")
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	if input == "Y\n" || input == "y\n" {
+		cmd4 := "mkdir " + folderName
+		createNewFolder := exec.Command("bash", "-c", cmd4)
+		createNewFolder.Run()
+		fileName := folderName + "logs"
+		fileName2 := folderName + "terminalCapture.txt" // Text file of all terminal output
+		_, err := os.Create(fileName)
+		if err != nil {
+			panic(err)
+		}
+		_, err = os.Create(fileName2)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		noFile = true
 	}
-	_ , err = os.Create(fileName2)
-	if err != nil {
-		panic(err)
-	}
+
 
 	fmt.Println("Beginning main loop...")
 	//Set up UI to say "Please let us know when the game is about to start//
@@ -122,5 +132,5 @@ func main() {
 	}
 
 	// Step 7: CleanUp after program
-	//returnScreenShotsToNormal()
+	returnScreenShotsToNormal()
 }

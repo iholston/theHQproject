@@ -82,7 +82,7 @@ func gameMod() {
 	"   \\ .:.\\  `':::'`  /.:. /" +"\n" +
 	"    \\':: |_       _| ::'/" +"\n" +
 	"     `---` `\"\"\"\"\"` `---`")
-	fmt.Println("ln         Game Module")
+	fmt.Println("\n         Game Module")
 	fmt.Print("---------------------------------\n")
 }
 
