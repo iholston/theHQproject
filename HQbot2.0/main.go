@@ -5,52 +5,18 @@ import (
 	"time"
 	"fmt"
 	"os"
-	"bufio"
 )
 
 var botStartTime = time.Now().Format("MonJan22006@15:04:05")
-var folderName = "/Users/TheChosenOne/go/theHQProject/gameTrials/" + botStartTime +"/"
+var folderName = "/Users/TheChosenOne/go/src/github.com/iholston/theHQProject/gameTrials/" + botStartTime +"/"
 var testMode = false
 var useDefault = false
 var testGame = false
 var terminalLog = "terminalLog"
 var testFN = "/Users/TheChosenOne/Desktop/testgamenotes.txt"
 
-func startUp() {
-	//Set up UI to say "Please Make sure phone is connected and unlocked"//
-	fmt.Print("Initializing....\n\nWhich type of start?\n" +
-		"---------------------------------\nf: full start\ns: skip QTP\n" +
-		"t: SQ test mode\nz: FG test mode\n---------------------------------\nEnter: ")
-	reader := bufio.NewReader(os.Stdin)
-	input, _ := reader.ReadString('\n')
+func init() { // 1. Changes Default ScreenShot Names and 2. Creates the session folder and log file
 
-	// If its a TEST
-	if input == "t\n" {
-		fmt.Println("\nEntering Test Mode...")
-		fmt.Print("Would you like to use default picture? (Y/n) ")
-		input, _ = reader.ReadString('\n')
-		if input == "Y\n" || input == "y\n" {
-			useDefault = true
-		}
-		fmt.Print("In this mode, log files appear on desktop and QTP setup is skipped.\n" +
-			"-------------------------------------------------------------------\n")
-		testMode = true
-		return
-	} else if input == "z\n" {
-		fmt.Println("\nTest Game Activated. Each question will have notes activated. \n" +
-			"Otherwise the game should run as normal. ~QTP Skipped")
-		testGame = true
-	} else if input == "s\n" {
-		fmt.Println("Skipping QuickTimePlayer setup function only. Everything else is normal.")
-	}
-	fmt.Print("----------------------------------------------------------------\n")
-	fmt.Print("Please make sure phone is connected and unlocked.\n")
-	fmt.Println("\nInitiating bot starting procedures...")
-	// Start QuickTimePlayer and get it to be using iphone as camera
-	// put this in helperFunc cuz a lot of debugging requires me to comment all that out
-	if input != "s\n" && input != "z\n" {
-		helperFunc("quickTimePlayerSetup")
-	}
 	// Change Default ScreenShot Names. Makes it much easier to locate screenshots
 	cmd1 := "defaults write com.apple.screencapture name \"QandA\""
 	changeScreenShotNames := exec.Command("bash", "-c", cmd1)
@@ -89,9 +55,9 @@ func main() {
 	var Answers [3][]byte
 	var err bool
 
-
 	// Logic
-	startUp() // Func: startUP() - 1. Starts QTP, 2. Changes Default ScreenShot Names, and 3. Creates the session folder and log file
+	startUpDialog()
+	gameMod()
 	for i := 1; i < 100; i++ {
 
 		// Test Game

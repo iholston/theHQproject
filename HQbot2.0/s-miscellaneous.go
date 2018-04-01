@@ -11,26 +11,10 @@ import (
 	"strconv"
 )
 
-func humanHandler(index int) bool {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("\nReady for question #" + strconv.Itoa(index) + ": ")
-	input, _ :=reader.ReadString('\n')
-	exitWord := "donzo\n"
-	if input == exitWord {
-		return true
-	}
-	fmt.Println("Capturing question from screen...")
-	if testMode == false {
-		robotgo.KeyTap("1", "control") // switches to Desktop 1
-	}
-	Sleep(1)
-	return false
-}
-
 func helperFunc(function string) {
 	switch function {
 	case "quickTimePlayerSetup" : {
-		robotgo.KeyTap("1", "control")
+	/*	robotgo.KeyTap("1", "control")
 		quickTime := exec.Command("bash", "-c", "open /Applications/QuickTime\\ Player.app/")
 		quickTime.Run()
 		Sleep(2)
@@ -42,7 +26,7 @@ func helperFunc(function string) {
 		robotgo.MouseClick()
 		Sleep(2)
 		robotgo.MoveMouse(669, 639)
-		robotgo.MouseClick()
+		robotgo.MouseClick()*/
 		for { // Test the screenshots
 			robotgo.KeyTap("1", "control")
 			SleepM(500)
@@ -61,6 +45,7 @@ func helperFunc(function string) {
 			if input == "y\n" {
 				continue
 			} else {
+				fmt.Println("-------------------------------------")
 				return
 			}
 		}
