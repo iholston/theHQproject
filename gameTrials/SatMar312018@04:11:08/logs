@@ -1,0 +1,95 @@
+Question No. 4 Tesseract Output: 
+Bytes: 
+Which of these is a German
+word for a hot dog?
+
+Schnitzel
+Frankfurter
+
+Sauerbraten
+
+
+String: 
+Which of these is a German
+word for a hot dog?
+
+Schnitzel
+Frankfurter
+
+Sauerbraten
+
+
+Parsed Question. Byte Length: 46
+Which of these is a German word for a hot dog?
+Parsed Answer 1. Byte Length: 9
+Schnitzel
+Parsed Answer 2. Byte Length: 11
+Frankfurter
+Parsed Answer 3. Byte Length: 11
+Sauerbraten
+That's all for the first question folks! 
+
+Question No. 5 Tesseract Output: 
+Bytes: 
+What does the "i" in "1080i"
+video stand for?
+
+Interlaced
+
+Interactive
+
+Intuitive
+
+
+String: 
+What does the "i" in "1080i"
+video stand for?
+
+Interlaced
+
+Interactive
+
+Intuitive
+
+
+Parsed Question. Byte Length: 45
+What does the "i" in "1080i" video stand for?
+Parsed Answer 1. Byte Length: 10
+Interlaced
+Parsed Answer 2. Byte Length: 11
+Interactive
+Parsed Answer 3. Byte Length: 9
+Intuitive
+That's all for the first question folks! 
+
+Question No. 6 Tesseract Output: 
+Bytes: 
+In what country was Trivial
+Pursuit created?
+
+Canada
+Japan
+
+USA
+
+
+String: 
+In what country was Trivial
+Pursuit created?
+
+Canada
+Japan
+
+USA
+
+
+Parsed Question. Byte Length: 44
+In what country was Trivial Pursuit created?
+Parsed Answer 1. Byte Length: 6
+Canada
+Parsed Answer 2. Byte Length: 5
+Japan
+Parsed Answer 3. Byte Length: 3
+USA
+That's all for the first question folks! 
+

@@ -1,0 +1,4 @@
+rm HQbot2.0
+go build
+sleep 1
+./HQbot2.0

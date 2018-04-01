@@ -1,0 +1,14 @@
+1. Set up GUI for thing to impress people more
+2. Figure out "NOT" questions
+3. Create optimized question searcher for Google defeating questions
+
+
+
+Add google question = wikipedia results to googleFP_Alg
+Add testGame mode where you can insert notes mid question
+start thinking of how to solve googleFP vs WIKIpage like question #6
+figure out question #7 ~~~~~ FIXED IT num3 was not +=ing it was just =ing and overwritting
+    the number of times the earlier parts were found
+
+Really need to make a google search that just gets whats on the google front page instead
+    of throughout the whole HTML

@@ -1,0 +1,402 @@
+Question No. 1 Tesseract Output: 
+Bytes: 
+TGIF most commonly
+stands for “Thank God It’s”
+what?
+
+Friday
+Frankenstein
+
+Flavortown
+
+
+String: 
+TGIF most commonly
+stands for “Thank God It’s”
+what?
+
+Friday
+Frankenstein
+
+Flavortown
+
+
+Parsed Question. Byte Length: 58
+TGIF most commonly stands for “Thank God It’s” what?
+Parsed Answer 1. Byte Length: 6
+Friday
+Parsed Answer 2. Byte Length: 12
+Frankenstein
+Parsed Answer 3. Byte Length: 10
+Flavortown
+That's all for the first question folks! 
+
+Question No. 2 Tesseract Output: 
+Bytes: 
+In which of these places
+were rulers known as
+pharaohs?
+
+Ancient Egypt
+Medieval Japan
+
+Studi054
+
+
+String: 
+In which of these places
+were rulers known as
+pharaohs?
+
+Ancient Egypt
+Medieval Japan
+
+Studi054
+
+
+Parsed Question. Byte Length: 55
+In which of these places were rulers known as pharaohs?
+Parsed Answer 1. Byte Length: 13
+Ancient Egypt
+Parsed Answer 2. Byte Length: 14
+Medieval Japan
+Parsed Answer 3. Byte Length: 8
+Studi054
+That's all for the first question folks! 
+
+Question No. 3 Tesseract Output: 
+Bytes: 
+In astronomical terms, what
+is the opposite of a full
+moon?
+
+Fresh moon
+New moon
+
+Hungry moon
+
+
+String: 
+In astronomical terms, what
+is the opposite of a full
+moon?
+
+Fresh moon
+New moon
+
+Hungry moon
+
+
+Parsed Question. Byte Length: 59
+In astronomical terms, what is the opposite of a full moon?
+Parsed Answer 1. Byte Length: 10
+Fresh moon
+Parsed Answer 2. Byte Length: 8
+New moon
+Parsed Answer 3. Byte Length: 11
+Hungry moon
+That's all for the first question folks! 
+
+Question No. 4 Tesseract Output: 
+Bytes: 
+In which of these sports can
+a player NOT get a strike?
+
+Bowling
+Baseba”
+
+Basketball
+
+
+String: 
+In which of these sports can
+a player NOT get a strike?
+
+Bowling
+Baseba”
+
+Basketball
+
+
+Parsed Question. Byte Length: 55
+In which of these sports can a player NOT get a strike?
+Parsed Answer 1. Byte Length: 7
+Bowling
+Parsed Answer 2. Byte Length: 9
+Baseba”
+Parsed Answer 3. Byte Length: 10
+Basketball
+That's all for the first question folks! 
+
+Question No. 5 Tesseract Output: 
+Bytes: 
+Which of these U.S. states is
+known for its panhandle?
+
+Florida
+Iowa
+
+Montana
+
+
+String: 
+Which of these U.S. states is
+known for its panhandle?
+
+Florida
+Iowa
+
+Montana
+
+
+Parsed Question. Byte Length: 54
+Which of these U.S. states is known for its panhandle?
+Parsed Answer 1. Byte Length: 7
+Florida
+Parsed Answer 2. Byte Length: 4
+Iowa
+Parsed Answer 3. Byte Length: 7
+Montana
+That's all for the first question folks! 
+
+Question No. 6 Tesseract Output: 
+Bytes: 
+What is the name of the
+scientiﬁc process that turns
+sugars into alcohol?
+
+Fermentation
+Photosynthesis
+
+Mutation
+
+
+String: 
+What is the name of the
+scientiﬁc process that turns
+sugars into alcohol?
+
+Fermentation
+Photosynthesis
+
+Mutation
+
+
+Parsed Question. Byte Length: 75
+What is the name of the scientiﬁc process that turns sugars into alcohol?
+Parsed Answer 1. Byte Length: 12
+Fermentation
+Parsed Answer 2. Byte Length: 14
+Photosynthesis
+Parsed Answer 3. Byte Length: 8
+Mutation
+That's all for the first question folks! 
+
+Question No. 7 Tesseract Output: 
+Bytes: 
+Which of these is both a city
+in Morocco AND a common
+style of hat?
+
+Kangol
+Fez
+
+Tangier
+
+
+String: 
+Which of these is both a city
+in Morocco AND a common
+style of hat?
+
+Kangol
+Fez
+
+Tangier
+
+
+Parsed Question. Byte Length: 67
+Which of these is both a city in Morocco AND a common style of hat?
+Parsed Answer 1. Byte Length: 6
+Kangol
+Parsed Answer 2. Byte Length: 3
+Fez
+Parsed Answer 3. Byte Length: 7
+Tangier
+That's all for the first question folks! 
+
+Question No. 8 Tesseract Output: 
+Bytes: 
+The guitarist in the E Street
+Band starred in which
+television show?
+
+The Sopra nos
+The Practice
+
+Rescue Me
+
+
+String: 
+The guitarist in the E Street
+Band starred in which
+television show?
+
+The Sopra nos
+The Practice
+
+Rescue Me
+
+
+Parsed Question. Byte Length: 68
+The guitarist in the E Street Band starred in which television show?
+Parsed Answer 1. Byte Length: 13
+The Sopra nos
+Parsed Answer 2. Byte Length: 12
+The Practice
+Parsed Answer 3. Byte Length: 9
+Rescue Me
+That's all for the first question folks! 
+
+Question No. 9 Tesseract Output: 
+Bytes: 
+In the U.S., which of these
+jobunﬁonnskiﬂegdto
+wear if you do not have that
+
+job?
+Surgeon
+
+Postal worker
+
+Airline pilot
+
+
+String: 
+In the U.S., which of these
+jobunﬁonnskiﬂegdto
+wear if you do not have that
+
+job?
+Surgeon
+
+Postal worker
+
+Airline pilot
+
+
+Parsed Question. Byte Length: 85
+In the U.S., which of these jobunﬁonnskiﬂegdto wear if you do not have that  job?
+Parsed Answer 1. Byte Length: 7
+Surgeon
+Parsed Answer 2. Byte Length: 13
+Postal worker
+Parsed Answer 3. Byte Length: 13
+Airline pilot
+That's all for the first question folks! 
+
+Question No. 10 Tesseract Output: 
+Bytes: 
+In 18th-century London,
+
+people mocked the ﬁrst
+
+public user of which of
+these accessories?
+
+Sunglasses
+Umbrella
+
+Pu rse
+
+
+String: 
+In 18th-century London,
+
+people mocked the ﬁrst
+
+public user of which of
+these accessories?
+
+Sunglasses
+Umbrella
+
+Pu rse
+
+
+Parsed Question. Byte Length: 93
+In 18th-century London,  people mocked the ﬁrst  public user of which of these accessories?
+Parsed Answer 1. Byte Length: 10
+Sunglasses
+Parsed Answer 2. Byte Length: 8
+Umbrella
+Parsed Answer 3. Byte Length: 6
+Pu rse
+That's all for the first question folks! 
+
+Question No. 11 Tesseract Output: 
+Bytes: 
+The co-creator of the ﬁrst
+baby monitor was recruited
+after his design of what?
+
+Portable radio
+Crib
+
+Coffee table
+
+
+String: 
+The co-creator of the ﬁrst
+baby monitor was recruited
+after his design of what?
+
+Portable radio
+Crib
+
+Coffee table
+
+
+Parsed Question. Byte Length: 81
+The co-creator of the ﬁrst baby monitor was recruited after his design of what?
+Parsed Answer 1. Byte Length: 14
+Portable radio
+Parsed Answer 2. Byte Length: 4
+Crib
+Parsed Answer 3. Byte Length: 12
+Coffee table
+That's all for the first question folks! 
+
+Question No. 12 Tesseract Output: 
+Bytes: 
+Painter Margaret Keane’s
+work directly inspired
+which cartoon series?
+
+Jem and the Holograms
+The Powerpuff Girls
+
+My Little Pony
+
+
+String: 
+Painter Margaret Keane’s
+work directly inspired
+which cartoon series?
+
+Jem and the Holograms
+The Powerpuff Girls
+
+My Little Pony
+
+
+Parsed Question. Byte Length: 71
+Painter Margaret Keane’s work directly inspired which cartoon series?
+Parsed Answer 1. Byte Length: 21
+Jem and the Holograms
+Parsed Answer 2. Byte Length: 19
+The Powerpuff Girls
+Parsed Answer 3. Byte Length: 14
+My Little Pony
+That's all for the first question folks! 
+
