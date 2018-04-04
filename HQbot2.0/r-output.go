@@ -6,6 +6,7 @@ import(
 	"os"
 	"strconv"
 	"github.com/go-vgo/robotgo"
+	"sync"
 )
 
 func startUpDialog() {
@@ -35,6 +36,7 @@ func startUpDialog() {
 		fmt.Print("In this mode, log files appear on desktop and QTP setup is skipped.\n" +
 			"-------------------------------------------------------------------\n")
 		testMode = true
+		return
 	} else if input == "z\n" {
 		fmt.Print(">> Test Game Activated\n---------------------------------\n")
 		fmt.Print("\nTest Game Module\n-------------------------------------------------------------")
@@ -101,4 +103,82 @@ func humanHandler(index int) bool {
 	}
 	Sleep(1)
 	return false
+}
+
+func testGameQ(index int) {
+	fmt.Println("\n---------------------------------")
+	fmt.Print("\nIs there any input for this question? (Y/n, Default = No) ")
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	if input == "Y\n" || input == "y\n" {
+		fmt.Print("\nWas the question correct? (Y/n) ")
+		input, _ = reader.ReadString('\n')
+		textFile, _ := os.Open("/Users/TheChosenOne/Desktop/testgamenotes.txt")
+		if input == "Y\n" || input == "y\n" {
+			textFile.WriteString("Question: " + strconv.Itoa(index) + " was correct")
+			textFile.WriteString("------------------------")
+		} else {
+			textFile.WriteString("Question: " + strconv.Itoa(index) + " was NOT correct")
+			textFile.WriteString("------------------------")
+		}
+		for {
+			fmt.Println("Type your notes below:")
+			fmt.Println("---------------------------------")
+			notes, _ := reader.ReadString('\n')
+			fmt.Println("Are you sure you want to commit? (Y/n)")
+			input, _ = reader.ReadString('\n')
+			if input == "Y\n" || input == "y\n" {
+				textFile.WriteString(notes)
+				textFile.WriteString("------------------------\n\n")
+				break
+			} else {
+				continue
+			}
+		}
+	}
+}
+
+func output(googErethen <-chan [3]int, googFP <-chan [3]int, wikiFP <-chan [3]int, googSR <-chan [3]int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	googEreAnswers := <-googErethen
+	googFPAnswers := <-googFP
+	wikiFPAnswers := <-wikiFP
+	googSRAnswers := <-googSR
+
+	//googleEverything() output
+	fmt.Println("\nGoogle Deep Search")
+	fmt.Println("-------------------")
+	fmt.Println("Answer 1: " + strconv.Itoa(googEreAnswers[0]))
+	fmt.Println("Answer 2: " + strconv.Itoa(googEreAnswers[1]))
+	fmt.Println("Answer 3: " + strconv.Itoa(googEreAnswers[2]))
+
+	//googleFP() output
+	fmt.Println("\nGoogle F_P Search")
+	fmt.Println("-------------------")
+	fmt.Println("Answer 1: " + strconv.Itoa(googFPAnswers[0]))
+	fmt.Println("Answer 2: " + strconv.Itoa(googFPAnswers[1]))
+	fmt.Println("Answer 3: " + strconv.Itoa(googFPAnswers[2]))
+
+	//wikiFP() output
+	fmt.Println("\nWiki First_P Search")
+	fmt.Println("-------------------")
+	fmt.Println("Answer 1: " + strconv.Itoa(wikiFPAnswers[0]))
+	fmt.Println("Answer 2: " + strconv.Itoa(wikiFPAnswers[1]))
+	fmt.Println("Answer 3: " + strconv.Itoa(wikiFPAnswers[2]))
+
+	//googSR() output
+	if googSRAnswers[0] > googSRAnswers[1] {
+		if googSRAnswers[0] > googSRAnswers[2] {
+			fmt.Println("\nGoogle About Search\n-------------------\nAnswer 1: Correct")
+		} else {
+			fmt.Println("\nGoogle About Search\n-------------------\nAnswer 3: Correct")
+		}
+	} else {
+		if googSRAnswers[1] > googSRAnswers[2] {
+			fmt.Println("\nGoogle About Search\n-------------------\nAnswer 2: Correct")
+		} else {
+			fmt.Println("\nGoogle About Search\n-------------------\nAnswer 3: Correct")
+		}
+	}
+
 }

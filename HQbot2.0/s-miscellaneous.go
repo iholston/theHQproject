@@ -8,13 +8,12 @@ import (
 	"os"
 	"time"
 	"strings"
-	"strconv"
 )
 
 func helperFunc(function string) {
 	switch function {
 	case "quickTimePlayerSetup" : {
-	/*	robotgo.KeyTap("1", "control")
+		robotgo.KeyTap("1", "control")
 		quickTime := exec.Command("bash", "-c", "open /Applications/QuickTime\\ Player.app/")
 		quickTime.Run()
 		Sleep(2)
@@ -26,7 +25,7 @@ func helperFunc(function string) {
 		robotgo.MouseClick()
 		Sleep(2)
 		robotgo.MoveMouse(669, 639)
-		robotgo.MouseClick()*/
+		robotgo.MouseClick()
 		for { // Test the screenshots
 			robotgo.KeyTap("1", "control")
 			SleepM(500)
@@ -59,39 +58,6 @@ func makeURL2(question []byte) string {
 	arrayQuestion := strings.Fields(stringQuestion)
 	url := strings.Join(arrayQuestion, "%20")
 	return url
-}
-
-func testGameQ(index int) {
-	fmt.Println("\n---------------------------------")
-	fmt.Print("\nIs there any input for this question? (Y/n, Default = No) ")
-	reader := bufio.NewReader(os.Stdin)
-	input, _ := reader.ReadString('\n')
-	if input == "Y\n" || input == "y\n" {
-		fmt.Print("\nWas the question correct? (Y/n) ")
-		input, _ = reader.ReadString('\n')
-		textFile, _ := os.Open("testgamenotes.txt")
-		if input == "Y\n" || input == "y\n" {
-			textFile.WriteString("Question: " + strconv.Itoa(index) + " was correct")
-			textFile.WriteString("------------------------")
-		} else {
-			textFile.WriteString("Question: " + strconv.Itoa(index) + " was NOT correct")
-			textFile.WriteString("------------------------")
-		}
-		for {
-			fmt.Println("Type your notes below:")
-			fmt.Println("---------------------------------")
-			notes, _ := reader.ReadString('\n')
-			fmt.Println("Are you sure you want to commit? (Y/n)")
-			input, _ = reader.ReadString('\n')
-			if input == "Y\n" || input == "y\n" {
-				textFile.WriteString(notes)
-				textFile.WriteString("------------------------\n\n")
-				break
-			} else {
-				continue
-			}
-		}
-	}
 }
 
 func Sleep(tim time.Duration) {

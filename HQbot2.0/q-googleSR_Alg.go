@@ -5,10 +5,11 @@ import (
 	"io/ioutil"
 	"regexp"
 	"strconv"
-	"fmt"
+	"sync"
 )
 
-func googleSR_Alg(qPartofURL string, answers [3][]byte) int {
+func googleSR_Alg(qPartofURL string, answers [3][]byte, out chan<- [3]int, wg *sync.WaitGroup ) {
+	defer wg.Done()
 	var results [3]int
 	var url [3]string
 	url[0] = qPartofURL + "%20" + makeURL2(answers[0])
@@ -30,21 +31,5 @@ func googleSR_Alg(qPartofURL string, answers [3][]byte) int {
 		}
 		results[i], _ = strconv.Atoi(k)
 	}
-	if results[0] > results[1] {
-		if results[0] > results[2] {
-			fmt.Println("\nGoogle results:\n---------------\nAnswer 1: Correct")
-			return 1 //results[0]
-		} else {
-			fmt.Println("\nGoogle results:\n---------------\nAnswer 3: Correct")
-			return 3 //results[2]
-		}
-	} else {
-		if results[1] > results[2] {
-			fmt.Println("\nGoogle results:\n---------------\nAnswer 2: Correct")
-			return 2 //results[1]
-		} else {
-			fmt.Println("\nGoogle results:\n---------------\nAnswer 3: Correct")
-			return 3 //results[2]
-		}
-	}
+	out <- results
 }

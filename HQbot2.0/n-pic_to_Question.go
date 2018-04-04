@@ -35,7 +35,7 @@ func picToQuestion(index int) ([]byte, [3][]byte, bool) {
 	var QandAs []byte
 	var err error
 	if useDefault == true {
-		QandAs, err = ioutil.ReadFile("/Users/TheChosenOne/go/theHQProject/HQbot2.0/x_text.txt")
+		QandAs, err = ioutil.ReadFile("/Users/TheChosenOne/go/src/github.com/iholston/theHQProject/HQbot2.0/x_text.txt")
 	} else {
 		QandAs, err = ioutil.ReadFile("/Users/TheChosenOne/Desktop/text.txt")
 	}
@@ -74,7 +74,7 @@ func picToQuestion(index int) ([]byte, [3][]byte, bool) {
 	answer1 := make([]byte, len(QandAs))
 	for i := 0; i < len(QandAs); i++ {
 		// This keeps new lines from being put in front of bytes slice and ends loop if at end of byte slice
-		if QandAindex == len(QandAs){
+		if QandAindex == len(QandAs) {
 			var answers [3][]byte
 			fmt.Println("ERROR: Next Question.")
 			cmd3 := "rm ~/Desktop/QandA.png ~/Desktop/croppedPic.png ~/Desktop/text.txt"
@@ -135,41 +135,43 @@ func picToQuestion(index int) ([]byte, [3][]byte, bool) {
 	// Step 2.8: Log questions and answers raw from tesseract and parsed
 	//			 in case something goes wrong
 	var fileName string
-	if testMode == true {
-		fileName = "/Users/TheChosenOne/Desktop/testlogs"
-	} else  {
-		fileName = folderName + "logs"
-	}
-	f, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
+	if noFile == false {
+		if testMode == true {
+			fileName = "/Users/TheChosenOne/Desktop/testlogs"
+		} else {
+			fileName = folderName + "logs"
+		}
+		f, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		if err != nil {
+			panic(err)
+		}
+		defer f.Close()
 
-	text := "Question No. " + strconv.Itoa(index) + " Tesseract Output: \nBytes: \n"
-	f.WriteString(text)
-	if _, err = f.Write(QandAs); err != nil {
-		panic(err)
+		text := "Question No. " + strconv.Itoa(index) + " Tesseract Output: \nBytes: \n"
+		f.WriteString(text)
+		if _, err = f.Write(QandAs); err != nil {
+			panic(err)
+		}
+		text = "\nString: \n"
+		f.WriteString(text)
+		if _, err = f.WriteString(string(QandAs)); err != nil {
+			panic(err)
+		}
+		text = "\nParsed Question. Byte Length: " + strconv.Itoa(len(question)) + "\n"
+		f.WriteString(text)
+		f.WriteString(string(question))
+		text = "\nParsed Answer 1. Byte Length: " + strconv.Itoa(len(answer1)) + "\n"
+		f.WriteString(text)
+		f.WriteString(string(answer1))
+		text = "\nParsed Answer 2. Byte Length: " + strconv.Itoa(len(answer2)) + "\n"
+		f.WriteString(text)
+		f.WriteString(string(answer2))
+		text = "\nParsed Answer 3. Byte Length: " + strconv.Itoa(len(answer3)) + "\n"
+		f.WriteString(text)
+		f.WriteString(string(answer3))
+		text = "\nThat's all for the first question folks! \n\n"
+		f.WriteString(text)
 	}
-	text = "\nString: \n"
-	f.WriteString(text)
-	if _, err = f.WriteString(string(QandAs)); err != nil {
-		panic(err)
-	}
-	text = "\nParsed Question. Byte Length: " + strconv.Itoa(len(question)) + "\n"
-	f.WriteString(text)
-	f.WriteString(string(question))
-	text = "\nParsed Answer 1. Byte Length: " + strconv.Itoa(len(answer1)) + "\n"
-	f.WriteString(text)
-	f.WriteString(string(answer1))
-	text = "\nParsed Answer 2. Byte Length: " + strconv.Itoa(len(answer2)) + "\n"
-	f.WriteString(text)
-	f.WriteString(string(answer2))
-	text = "\nParsed Answer 3. Byte Length: " + strconv.Itoa(len(answer3)) + "\n"
-	f.WriteString(text)
-	f.WriteString(string(answer3))
-	text = "\nThat's all for the first question folks! \n\n"
-	f.WriteString(text)
 
 
 	// Step 3: Cleanup. Move ScreenShots and text stuffs to log folder & return
@@ -178,15 +180,15 @@ func picToQuestion(index int) ([]byte, [3][]byte, bool) {
 		movePNG := exec.Command("bash", "-c", cmd3)
 		movePNG.Run()
 	} else {
-		cmd3 := "mv ~/Desktop/QandA.png /Users/TheChosenOne/go/theHQProject/gameTrials/"
+		cmd3 := "mv ~/Desktop/QandA.png /Users/TheChosenOne/go/src/github.com/iholston/theHQProject/gameTrials/"
 		cmd3 += botStartTime + "/QandA" + strconv.Itoa(index) + ".png"
 		movePNG := exec.Command("bash", "-c", cmd3)
 		movePNG.Run()
-		cmd4 := "mv ~/Desktop/text.txt /Users/TheChosenOne/go/theHQProject/gameTrials/"
+		cmd4 := "mv ~/Desktop/text.txt /Users/TheChosenOne/go/src/github.com/iholston/theHQProject/gameTrials/"
 		cmd4 += botStartTime + "/QandAtext" + strconv.Itoa(index) + ".txt"
 		moveText := exec.Command("bash", "-c", cmd4)
 		moveText.Run()
-		cmd5 := "mv ~/Desktop/croppedPic.png /Users/TheChosenOne/go/theHQProject/gameTrials/"
+		cmd5 := "mv ~/Desktop/croppedPic.png /Users/TheChosenOne/go/src/github.com/iholston/theHQProject/gameTrials/"
 		cmd5 += botStartTime + "/croppedPic" + strconv.Itoa(index) + ".png"
 		moveCPNG := exec.Command("bash", "-c", cmd5)
 		moveCPNG.Run()

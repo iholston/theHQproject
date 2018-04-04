@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"bufio"
+	"sync"
 )
 
 var botStartTime = time.Now().Format("MonJan22006@15:04:05")
@@ -64,18 +65,26 @@ func main() {
 	var Question []byte
 	var Answers [3][]byte
 	var err bool
+	var wg sync.WaitGroup
 
 	// Logic
 	startUpDialog()
 	gameMod()
-	for i := 1; i < 100; i++ {
 
-		// Test Game
+	for i := 1; i < 100; i++ {
+		// If Test Game
 		if testGame == true {
 			_ , err := os.Create(testFN)
 			if err != nil {
 				panic(err)
 			}
+		}
+
+		// In loop variables
+		googleEverythin := make(chan [3]int)
+		var chans [4]chan [3]int
+		for i := range chans {
+			chans[i] = make(chan [3]int)
 		}
 
 		// Step 1: Get the Human to tell you when the question is on Screen
@@ -92,40 +101,18 @@ func main() {
 		fmt.Println(string(Answers[0]), string(Answers[1]), string(Answers[2]))
 		AnswersString := [3]string{string(Answers[0]), string(Answers[1]), string(Answers[2])}
 
+
 		// Step 3: Run original question and answers through different Algorithms
-
-			// Step 3.1: Google question and see how many times each answer is on the first page
-		googleFirstPageIt(makeURL2(Question), AnswersString) // Returns [3][5]int and an int
-
-			// Step 3.2: Google question + "wikipedia", grab the wikipedia article that pops up
-			//			 see how many times each answer appears on that page
-		wikiFirstPageIt(makeURL2(Question), AnswersString)
-
-			// Step 3.3: Google question with answer and see how many results it returns
-		googleSR_Alg(makeURL2(Question), Answers)
+		wg.Add(5)
+		go googleEverything(makeURL2(Question), AnswersString, googleEverythin, &wg)
+		go googleFirstPageIt(makeURL2(Question), AnswersString, chans[0], &wg)
+		go wikiFirstPageIt(makeURL2(Question), AnswersString, chans[1], &wg)
+		go googleSR_Alg(makeURL2(Question), Answers, chans[2], &wg)
+		go output(googleEverythin, chans[0], chans[1], chans[2], &wg)
+		wg.Wait()
 
 
-		// Step 4: Create "Better" question and run it through the previous algorithms
-		//createBetterQuestion(Question)
-
-			// Step 4.1: Same as 3.1 but with "BETTER QUESTION"
-		//googleFirstPageIt(makeURL(Question), AnswersString) // Returns [3][5]int and an int
-
-			// Step 4.2: Same as 3.2 but with "BETTER QUESTION"
-		//wikiFirstPageIt(makeURL(Question), AnswersString)
-
-			// Step 4.3: Same as 3.3 but with "BETTER QUESTION"
-		//googleResultsIt()
-
-
-		// Step 5: Take all data and determine the final answer
-		//FinalGuess()
-
-
-		// Step 6: Display Answer
-		//displayAnswers()
-
-		// Test Game Mode:
+		// If Test Game Mode:
 		if testGame == true {
 			testGameQ(i)
 		}
