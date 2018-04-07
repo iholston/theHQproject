@@ -41,22 +41,14 @@ func googleFirstPageIt(url string, answers [3]string, out chan<- [3]int, wg *syn
 		num2 := strings.Count(s, processedAnswer)
 
 		// Step 3.3: Split answer up into individual parts and see how many times those appear
+		// Update: Changed to only look for the first word multiple times cuz the wrong answers
+		//			can be very wrong with small four letter words and throw off the algorithm
 		ansW := strings.Split(processedAnswer, " ")
-		j := 0
-		var num3 int
-		for range ansW {
-			if len(ansW[j]) < 4 {
-				j++
-				continue
-			}
-			num3 += strings.Count(s, ansW[j])
-			j++
-		}
+		num3 := strings.Count(s, ansW[0])
 
 		// Step 3.4: Count all matches and put them into array and get a total value
 		totalNum := num1 + num2 + num3
 		totalArray[i] = totalNum
-
 	}
 
 	// Step 5: Output to output()

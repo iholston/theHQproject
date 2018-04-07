@@ -6,17 +6,21 @@ import (
 	"strings"
 	"regexp"
 	"log"
+	"fmt"
+	"strconv"
 	"sync"
 )
 
-func googleEverything(url string, answers [3]string, out chan<- [3]int, wg1 *sync.WaitGroup) {
-	defer wg1.Done()
-	var chans [10]chan [3]int
-	var totalArray [3]int
-	var wg sync.WaitGroup
-
+func googleEverything(url string, answers [3]string, out chan<- [3]int, wg *sync.WaitGroup, timeout <-chan bool) {
+	defer wg.Done()
+	var chans [10]chan [3]int // Ten channels for the ten go routines to talk
+	var totalArray [3]int	  // Final array to return
+	var resulties [10][3]int  // Array that holds the return values from all the go routines
 	for i := range chans {
-		chans[i] = make(chan [3]int)
+		chans[i] = make(chan [3]int, 2)
+	}
+	for i := 0; i < 10; i++ {
+		resulties[i] = [3]int{0,0,0}
 	}
 
 	// Step 1: Get body text from url
@@ -33,30 +37,40 @@ func googleEverything(url string, answers [3]string, out chan<- [3]int, wg1 *syn
 	urls := strings.Split(s, "<h3 class=\"r\"><a href=\"/url?q=")
 	howMany := len(urls)
 
-	if howMany < 11 {
+	if howMany < 11 { // if google returns less than ten urls then only do five, rather than trying to find out how many
 		url1 := strings.Split(urls[1], "&amp;sa")
 		url2 := strings.Split(urls[2], "&amp;sa")
 		url3 := strings.Split(urls[3], "&amp;sa")
 		url4 := strings.Split(urls[4], "&amp;sa")
 		url5 := strings.Split(urls[5], "&amp;sa")
 
-		wg.Add(5)
-		go searchPage(url1[0], answers, chans[0], &wg)
-		go searchPage(url2[0], answers, chans[1], &wg)
-		go searchPage(url3[0], answers, chans[2], &wg)
-		go searchPage(url4[0], answers, chans[3], &wg)
-		go searchPage(url5[0], answers, chans[4], &wg)
+		go searchPage(url1[0], answers, chans[0], 1)
+		go searchPage(url2[0], answers, chans[1], 2)
+		go searchPage(url3[0], answers, chans[2], 3)
+		go searchPage(url4[0], answers, chans[3], 4)
+		go searchPage(url5[0], answers, chans[4], 5)
 
-		results1 := <-chans[0]
-		results2 := <-chans[1]
-		results3 := <-chans[2]
-		results4 := <-chans[3]
-		results5 := <-chans[4]
-		wg.Wait()
-
-		totalArray[0] = results1[0] + results2[0] + results3[0] + results4[0] + results5[0]
-		totalArray[1] = results1[1] + results2[1] + results3[1] + results4[1] + results5[1]
-		totalArray[2] = results1[2] + results2[2] + results3[2] + results4[2] + results5[2]
+		timedout := false
+		for i := 0; i < 10; i++ {
+			if timedout == true {
+				break
+			}
+			select {
+			case resulties[0] = <-chans[0]:
+			case resulties[1] = <-chans[1]:
+			case resulties[2] = <-chans[2]:
+			case resulties[3] = <-chans[3]:
+			case resulties[4] = <-chans[4]:
+			case resulties[5] = <-chans[5]:
+			case timedout = <-timeout:
+				break
+			}
+		}
+		for i := 0; i < 5; i++ {
+			totalArray[0] += resulties[i][0]
+			totalArray[1] += resulties[i][1]
+			totalArray[2] += resulties[i][2]
+		}
 		out <- totalArray
 	} else {
 		url1 := strings.Split(urls[1], "&amp;sa")
@@ -70,45 +84,63 @@ func googleEverything(url string, answers [3]string, out chan<- [3]int, wg1 *syn
 		url9 := strings.Split(urls[9], "&amp;sa")
 		url10 := strings.Split(urls[10], "&amp;sa")
 
-		wg.Add(10)
-		go searchPage(url1[0], answers, chans[0], &wg)
-		go searchPage(url2[0], answers, chans[1], &wg)
-		go searchPage(url3[0], answers, chans[2], &wg)
-		go searchPage(url4[0], answers, chans[3], &wg)
-		go searchPage(url5[0], answers, chans[4], &wg)
-		go searchPage(url6[0], answers, chans[5], &wg)
-		go searchPage(url7[0], answers, chans[6], &wg)
-		go searchPage(url8[0], answers, chans[7], &wg)
-		go searchPage(url9[0], answers, chans[8], &wg)
-		go searchPage(url10[0], answers, chans[9], &wg)
+		//go getValues(chans, timeout, resulties)
+		go searchPage(url1[0], answers, chans[0], 1)
+		go searchPage(url2[0], answers, chans[1], 2)
+		go searchPage(url3[0], answers, chans[2], 3)
+		go searchPage(url4[0], answers, chans[3], 4)
+		go searchPage(url5[0], answers, chans[4], 5)
+		go searchPage(url6[0], answers, chans[5], 6)
+		go searchPage(url7[0], answers, chans[6], 7)
+		go searchPage(url8[0], answers, chans[7], 8)
+		go searchPage(url9[0], answers, chans[8], 9)
+		go searchPage(url10[0], answers, chans[9], 10)
 
-		results1 := <-chans[0]
-		results2 := <-chans[1]
-		results3 := <-chans[2]
-		results4 := <-chans[3]
-		results5 := <-chans[4]
-		results6 := <-chans[5]
-		results7 := <-chans[6]
-		results8 := <-chans[7]
-		results9 := <-chans[8]
-		results10 := <-chans[9]
-		wg.Wait()
-
-		totalArray[0] = results1[0] + results2[0] + results3[0] + results4[0] + results5[0] +
-			results6[0] + results7[0] + results8[0] + results9[0] + results10[0]
-		totalArray[1] = results1[1] + results2[1] + results3[1] + results4[1] + results5[1] +
-			results6[0] + results7[1] + results8[1] + results9[1] + results10[1]
-		totalArray[2] = results1[2] + results2[2] + results3[2] + results4[2] + results5[2] +
-			results6[0] + results7[2] + results8[2] + results9[2] + results10[2]
+		timedout := false
+		for i := 0; i < 10; i++ {
+			if timedout == true {
+				break
+			}
+			select {
+			case resulties[0] = <-chans[0]:
+			case resulties[1] = <-chans[1]:
+			case resulties[2] = <-chans[2]:
+			case resulties[3] = <-chans[3]:
+			case resulties[4] = <-chans[4]:
+			case resulties[5] = <-chans[5]:
+			case resulties[6] = <-chans[6]:
+			case resulties[7] = <-chans[7]:
+			case resulties[8] = <-chans[8]:
+			case resulties[9] = <-chans[9]:
+			case timedout = <-timeout:
+				break
+			}
+		}
+		for i := 0; i < 10; i++ {
+			totalArray[0] += resulties[i][0]
+			totalArray[1] += resulties[i][1]
+			totalArray[2] += resulties[i][2]
+		}
 		out <- totalArray
 	}
 }
 
-func searchPage(url string, answers [3]string, out chan<- [3]int, wg *sync.WaitGroup) {
-	defer wg.Done()
+func searchPage(url string, answers [3]string, out chan<- [3]int, searchN int) {
 	// Step 1: Get body text from url
-	resp, _ := http.Get(url)
-	bytes, _ := ioutil.ReadAll(resp.Body)
+	resp, err := http.Get(url)
+	if err != nil {
+		totalA := [3]int{0,0,0}
+		fmt.Println("ERROR1 go searchPage #" + strconv.Itoa(searchN))
+		out <-totalA
+		return
+	}
+	bytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		totalA := [3]int{0,0,0}
+		fmt.Println("ERROR2 go searchPage #" + strconv.Itoa(searchN))
+		out <-totalA
+		return
+	}
 	resp.Body.Close()
 	s := string(bytes)
 
@@ -136,20 +168,11 @@ func searchPage(url string, answers [3]string, out chan<- [3]int, wg *sync.WaitG
 		num2 := strings.Count(s, processedAnswer)
 
 		// Step 3.3: Split answer up into individual parts and see how many times those appear
-		ansW := strings.Split(processedAnswer, " ")
-		j := 0
-		var num3 int
-		for range ansW {
-			if len(ansW[j]) < 4 {
-				j++
-				continue
-			}
-			num3 += strings.Count(s, ansW[j])
-			j++
-		}
+		//ansW := strings.Split(processedAnswer, " ")
+		//num3 := strings.Count(s, ansW[0])
 
 		// Step 3.4: Add up findings
-		totalNum := num1 + num2 + num3
+		totalNum := num1 + num2 //+ num3
 		totalArray[i] = totalNum
 	}
 	// Step 4: Send out results

@@ -17,14 +17,20 @@ func helperFunc(function string) {
 		quickTime := exec.Command("bash", "-c", "open /Applications/QuickTime\\ Player.app/")
 		quickTime.Run()
 		Sleep(2)
+		robotgo.KeyTap("space", "command")
+		SleepM(500)
+		robotgo.TypeStr("quickTime")
+		SleepM(500)
+		robotgo.KeyTap("enter")
+		SleepM(500)
 		mods := []string{"alt", "command"}
 		robotgo.KeyTap("n", mods)
-		Sleep(5)
-		robotgo.MoveMouse(660, 584)
+		Sleep(3)
+		robotgo.MoveMouseSmooth(658, 581)
 		Sleep(1)
 		robotgo.MouseClick()
-		Sleep(2)
-		robotgo.MoveMouse(669, 639)
+		Sleep(1)
+		robotgo.MoveMouseSmooth(669, 639)
 		robotgo.MouseClick()
 		for { // Test the screenshots
 			robotgo.KeyTap("1", "control")
@@ -45,6 +51,7 @@ func helperFunc(function string) {
 				continue
 			} else {
 				fmt.Println("-------------------------------------")
+				fmt.Println("______________________________________________________________________________")
 				return
 			}
 		}
@@ -80,3 +87,4 @@ func returnScreenShotsToNormal(){
 	addDateandTimeBack.Run()
 	restart.Run()
 }
+

@@ -7,6 +7,7 @@ import(
 	"strconv"
 	"github.com/go-vgo/robotgo"
 	"sync"
+	"math/rand"
 )
 
 func startUpDialog() {
@@ -31,10 +32,12 @@ func startUpDialog() {
 			testMode = true
 			fmt.Print("In this mode, log files appear on desktop and QTP setup is skipped.\n" +
 				"-------------------------------------------------------------------\n")
+			fmt.Println("_____________________________________________________________________________")
 			return
 		}
 		fmt.Print("In this mode, log files appear on desktop and QTP setup is skipped.\n" +
 			"-------------------------------------------------------------------\n")
+		fmt.Println("________________________________________________________________________________")
 		testMode = true
 		return
 	} else if input == "z\n" {
@@ -47,6 +50,7 @@ func startUpDialog() {
 	} else if input == "s\n" {
 		fmt.Println(">> Skipping QTP function only.")
 		fmt.Println("---------------------------------")
+		fmt.Println("________________________________________________________________________________")
 		return
 	}
 	if input == "\n" || input == "f\n"{
@@ -61,38 +65,43 @@ func startUpDialog() {
 }
 
 func gameMod() {
-	fmt.Print("\n" +
-	"     __            /^\\" + "\n" +
-	"   .'  \\          / :.\\" + "\n" +
-	"  /     \\         | :: \\" +"\n" +
-	" /   /.  \\       / ::: |" +"\n" +
-	"|    |::. \\     / :::'/" +"\n" +
-	"|   / \\::. |   / :::'/" +"\n" +
-	" `--`   \\'  `~~~ ':'/`" +"\n" +
-	"         /         (" +"\n" +
-	"        /   0 _ 0   \\" +"\n" +
-	"      \\/     \\_/     \\/" +"\n" +
-	"    -== '.'   |   '.' ==-" +"\n" +
-	"      /\\    '-^-'    /\\" +"\n" +
-	"        \\   _   _   /" +"\n" +
-	"       .-`-((\\o/))-`-." +"\n" +
-	"  _   /     //^\\\\     \\   _" +"\n" +
-	".\"o\".(    , .:::. ,    ).\"o\"." +"\n" +
-	"|o  o\\     \\:::::/    //o  o| " +"\n" +
-	" \\    \\\\   |:::::|   //    /   " +"\n" +
-	"  \\    \\\\__/:::::\\__//    /   " +"\n" +
-	"   \\ .:.\\  `':::'`  /.:. /" +"\n" +
-	"    \\':: |_       _| ::'/" +"\n" +
-	"     `---` `\"\"\"\"\"` `---`")
-	fmt.Println("\n         Game Module")
-	fmt.Print("---------------------------------\n")
+	fmt.Print("\n\n\n" +
+	"                              __            /^\\" + "\n" +
+	"                            .'  \\          / :.\\" + "\n" +
+	"                           /     \\         | :: \\" +"\n" +
+	"                          /   /.  \\       / ::: |" +"\n" +
+	"                         |    |::. \\     / :::'/" +"\n" +
+	"                         |   / \\::. |   / :::'/" +"\n" +
+	"                          `--`   \\'  `~~~ ':'/`" +"\n" +
+	"                                  /         (" +"\n" +
+	"                                 /   0 _ 0   \\" +"\n" +
+	"                               \\/     \\_/     \\/" +"\n" +
+	"                             -== '.'   |   '.' ==-" +"\n" +
+	"                               /\\    '-^-'    /\\" +"\n" +
+	"                                 \\   _   _   /" +"\n" +
+	"                                .-`-((\\o/))-`-." +"\n" +
+	"                           _   /     //^\\\\     \\   _" +"\n" +
+	"                         .\"o\".(    , .:::. ,    ).\"o\"." +"\n" +
+	"                         |o  o\\     \\:::::/    //o  o| " +"\n" +
+	"                          \\    \\\\   |:::::|   //    /   " +"\n" +
+	"                           \\    \\\\__/:::::\\__//    /   " +"\n" +
+	"                            \\ .:.\\  `':::'`  /.:. /" +"\n" +
+	"                             \\':: |_       _| ::'/" +"\n" +
+	"                              `---` `\"\"\"\"\"` `---`")
+	fmt.Println("\n                                  Game Module")
 }
 
 func humanHandler(index int) bool {
 	reader := bufio.NewReader(os.Stdin)
+
+	random := rand.Intn(3)
+
+	if random == 0 {
+	}
+	fmt.Println("________________________________________________________________________________")
 	fmt.Print("\nReady for question #" + strconv.Itoa(index) + ": ")
 	input, _ :=reader.ReadString('\n')
-	fmt.Print("---------------------------------\n")
+	fmt.Print("-------------------\n")
 	exitWord := "donzo\n"
 	if input == exitWord {
 		return true
@@ -145,6 +154,8 @@ func output(googErethen <-chan [3]int, googFP <-chan [3]int, wikiFP <-chan [3]in
 	wikiFPAnswers := <-wikiFP
 	googSRAnswers := <-googSR
 
+	superAnswer := robotics(googEreAnswers, googFPAnswers, wikiFPAnswers, googSRAnswers)
+
 	//googleEverything() output
 	fmt.Println("\nGoogle Deep Search")
 	fmt.Println("-------------------")
@@ -181,4 +192,68 @@ func output(googErethen <-chan [3]int, googFP <-chan [3]int, wikiFP <-chan [3]in
 		}
 	}
 
+	fmt.Println("\n\nFINAL PREDICTION: Answer " + strconv.Itoa(superAnswer[0]))
+	if superAnswer[1] == 100 {
+		fmt.Println("CONFIDENCE LEVEL: 99.9% - VERY CONFIDENT")
+	} else if superAnswer[1] == 90 {
+		rand := rand.Intn(5) + 90
+		fmt.Println("CONFIDENCE LEVEL: " + strconv.Itoa(rand) + "% - CONFIDENT")
+	} else if superAnswer[1] == 60 {
+		rand := rand.Intn(10) + 75
+		fmt.Println("CONFIDENCE LEVEL: " + strconv.Itoa(rand) + "% - CONFIDENT")
+	} else if superAnswer[1] == 55 {
+		rand := rand.Intn(10) + 60
+		fmt.Println("CONFIDENCE LEVEL: " + strconv.Itoa(rand) + "% - LESS CONFIDENT")
+	} else if superAnswer[1] == 50 {
+		rand := rand.Intn(5) + 50
+		fmt.Println("CONFIDENCE LEVEL: " + strconv.Itoa(rand) + "% - NOT CONFIDENT")
+	}
+
+	fmt.Println("________________________________________________________________________________\n\n")
 }
+
+func robotics(gE [3]int, gFP [3]int, wFP [3]int, gSR [3]int) [2]int {
+	bigArray := [4][3]int{gE, gFP, wFP, gSR}
+	var wW [4]int
+
+	// Step 1: This for loop figures out who won the most and stores in wW := whoWon
+	for i, array := range bigArray {
+		if array[0] > array[1] {
+			if array[0] > array[2] {
+				wW[i] = 1
+			} else if array[2] > array[0] {
+				wW[i] = 3
+			} else {
+				wW[i] = 0
+			}
+		} else {
+			if array[1] > array[2] {
+				wW[i] = 2
+			} else if array[2] > array[0] {
+				wW[i] = 3
+			} else {
+				wW[i] = 0
+			}
+		}
+	}
+
+	// Step 2: Based on who won send back the answer and a confidence level. al of them are
+	//		   compared to the Google Deep search aglorithm, that is the default choice
+	if wW[0] == wW[1] && wW[1] == wW[2] && wW[2] == wW[3] {
+		returnArray := [2]int{wW[0], 100}
+		return returnArray
+	} else if wW[0] == wW[1] && wW[1] == wW[2] {
+		returnArray := [2]int{wW[0], 90}
+		return returnArray
+	} else if wW[0] == wW[1] {
+		returnArray := [2]int{wW[0], 60}
+		return returnArray
+	} else if wW[0] == wW[2] {
+		returnArray := [2]int{wW[0], 55}
+		return returnArray
+	} else {
+		returnArray := [2]int{wW[0], 50}
+		return returnArray
+	}
+
+  }

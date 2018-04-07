@@ -32,6 +32,7 @@ func init() { // 1. Changes Default ScreenShot Names and 2. Creates the session 
 	restart.Run()
 
 	// Create New folder for Question.pngs and QuestionText.pngs and create log file
+	fmt.Println("________________________________________________________________________________")
 	fmt.Print("\nWould you like to make logs for this game? (Y/n): ")
 	reader := bufio.NewReader(os.Stdin)
 	input, _ := reader.ReadString('\n')
@@ -103,14 +104,20 @@ func main() {
 
 
 		// Step 3: Run original question and answers through different Algorithms
+		timeout := make(chan bool, 10)
+		go func() {
+			Sleep(2)
+			for i := 0; i < 10; i++ {
+				timeout <- true
+			}
+		}()
 		wg.Add(5)
-		go googleEverything(makeURL2(Question), AnswersString, googleEverythin, &wg)
+		go googleEverything(makeURL2(Question), AnswersString, googleEverythin, &wg, timeout)
 		go googleFirstPageIt(makeURL2(Question), AnswersString, chans[0], &wg)
 		go wikiFirstPageIt(makeURL2(Question), AnswersString, chans[1], &wg)
 		go googleSR_Alg(makeURL2(Question), Answers, chans[2], &wg)
 		go output(googleEverythin, chans[0], chans[1], chans[2], &wg)
 		wg.Wait()
-
 
 		// If Test Game Mode:
 		if testGame == true {

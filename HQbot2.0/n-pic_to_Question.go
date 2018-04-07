@@ -19,14 +19,14 @@ func picToQuestion(index int) ([]byte, [3][]byte, bool) {
 		arr := []string{"shift", "command"}
 		robotgo.KeyTap("3", arr) // takes screen shot for tesseract
 		SleepM(500)
-		cmd1 := "convert ~/Desktop/QandA.png -crop 700x700+915+300 ~/Desktop/croppedPic.png"
+		cmd1 := "convert ~/Desktop/QandA.png -crop 700x700+915+350 ~/Desktop/croppedPic.png"
 		crop := exec.Command("bash", "-c", cmd1)
 		crop.Run()
-		SleepM(500)
+		SleepM(600)
 		cmd2 := "tesseract ~/Desktop/croppedPic.png ~/Desktop/text"
 		tesseract := exec.Command("bash", "-c", cmd2)
 		tesseract.Run()
-		Sleep(1)
+		SleepM(750)
 		robotgo.KeyTap("2", "control")
 	}
 

@@ -115,7 +115,7 @@ func wikiFirstPageIt(url string, answers [3]string, out chan<- [3]int, wg *sync.
 		fmt.Println("Suck my peen")
 		finalURL = lookFor + "suck_my_peen"
 	}
-	fmt.Println("\nWiki Link: " + finalURL)
+	fmt.Println("WikiLink: " + finalURL)
 	// Step 4: Do exactly what gfirst_page_alg.go does but with new url
 	// Step 1: Get body text from url
 	s := web_Parser(finalURL)
@@ -139,17 +139,10 @@ func wikiFirstPageIt(url string, answers [3]string, out chan<- [3]int, wg *sync.
 		processedAnswer := reg.ReplaceAllString(answers[i], " ")
 		processedAnswer = strings.TrimSpace(processedAnswer)
 		num2 := strings.Count(s, processedAnswer)
+		// Update: Changed to only look for the first word multiple times cuz the wrong answers
+		//			can be very wrong with small four letter words and throw off the algorithm
 		ansW := strings.Split(processedAnswer, " ")
-		j := 0
-		var num3 int
-		for range ansW {
-			if len(ansW[j]) < 4 {
-				j++
-				continue
-			}
-			num3 += strings.Count(s, ansW[j])
-			j++
-		}
+		num3 := strings.Count(s, ansW[0])
 		totalNum := num1 + num2 + num3
 		totalArray[i] = totalNum
 	}

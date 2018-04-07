@@ -1,14 +1,48 @@
+TODO
+----------------------------------------------------------------------
 1. Set up GUI for thing to impress people more
 2. Figure out "NOT" questions
 3. Create optimized question searcher for Google defeating questions
+4.
+5. Go over both of friday april 6ths games
+6. Figure out the breaking up the answer "num3" part of algorithms
+7. Would be nice to read through only body of html pages instead of all hmtl cuz some of the answers
+   are keywords in the html
+8. Fix tesGame mode inserting notes
+9. Optimize final answer algorithm
+
+
+Completed
+----------------------------------------------------------------------
+#1 Force go routines to run in set amount of time. COMPLETED
+#2
+
+
+Brain Storm ~ add new things to top please
+----------------------------------------------------------------------
+
+
 
 
 
 Add google question = wikipedia results to googleFP_Alg
 Add testGame mode where you can insert notes mid question
 start thinking of how to solve googleFP vs WIKIpage like question #6
-figure out question #7 ~~~~~ FIXED IT num3 was not +=ing it was just =ing and overwritting
+figure out question #7 ~~~~~ FIXED IT num3 was not +=ing it was just =ing and over-writing
     the number of times the earlier parts were found
 
 Really need to make a google search that just gets whats on the google front page instead
     of throughout the whole HTML
+
+Change NOT questions to tell user that it should be between one or the other question. Actually
+it should be able to tell if the question is one or the other due to either it being highly found
+or not found at all.
+
+make go routines have to run in set amount of time
+
+make the breaking up the answer only take the first word
+
+google deep search needs to have only num1 and num2; modify google fp ; wiki can be fine
+
+need to go over both of friday april 6ths games
+
