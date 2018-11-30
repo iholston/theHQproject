@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- #######  YAY, I AM THE SOURCE EDITOR! #########--><center>
+    <h1>Got a quiz or test question? See what the Internet thinks!</h1>
+</center>
+    <p><br /> </p>
+    <form action="hqthis"><center>
+        <h2>Input the quiz/test question:</h2>
+    </center><center>Question: <input name="question" type="text" placeholder="{{.Place1}}"/></center><br /><center>
+        <h2>Input the multiple choice answers:</h2>
+    </center>
+        <center>Choice 1: <input name="m1" type="text" placeholder="{{.Place2}}"/> {{ .Var1 }}</center><br />
+        <center>Choice 2: <input name="m2" type="text" placeholder="{{.Place3}}"/> {{ .Var2 }}</center><br />
+        <center>Choice 3: <input name="m3" type="text" placeholder="{{.Place4}}"/> {{ .Var3 }}</center><br />
+        <center>Choice 4: <input name="m4" type="text" placeholder="{{.Place5}}"/> {{ .Var4 }}</center><br />
+        <center><input type="submit" value="Submit" /></center></form>
+</html>
