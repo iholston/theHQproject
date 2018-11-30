@@ -1,0 +1,1 @@
+This is a web app that repurposes the HQbot to answer generic quiz or test questions in a similar manner to how the HQbot answered them. More of a learning experience than anything else. Currently being hosted at www.random2047.com.

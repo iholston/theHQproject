@@ -1,0 +1,3 @@
+HQbot plays HQ Trivia on ios, and at the time was consistently answering 10-11 of the 12 questions correctly. Which with the extra life bug that was allowed to continue, allowed you to win quite often. I built this from scratch myself, HQ bots became popular at one point but I think I beat the mainstream rush.
+
+QuizKiller was me being bored at work and deciding to take the HQbot that I had not touched in half a year and bring it back to life by making it a web app that anyone could use. Type in your question plus possible choices from your quiz and it will give you the answers. One day hopefully you can just upload the source code from the webpage of your quiz or test and it will be able to parse out the questions and choices for you and answer them lol.
