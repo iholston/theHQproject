@@ -1,1 +1,3 @@
-HQbot plays HQ Trivia on ios, and at the time was consistently answering 10-11 of the 12 questions correctly. Which with the extra life bug that was allowed to continue, allowed you to win quite often. I built this from scratch myself, HQ bots became popular at one point but I think I beat the mainstream rush.
+This bot takes ios screenshot of HQ Trivia question as input and outputs an answer to the question after scraping google. Consistently answered 10-11 of the 12 
+questions correctly, which with the extra life bug, allowed you to win quite often. Built from scratch during the downtime in my required gen ed classes. 
+This was a working bot before HQ bots became super popular.
